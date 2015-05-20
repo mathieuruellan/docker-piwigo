@@ -25,6 +25,7 @@ piwigo:
       - /home/piwigo/data/plugins:/var/www/plugins
       - /home/piwigo/data/themes:/var/www/themes
       - /home/piwigo/cache:/var/www/_data/i
+      - /home/piwigo/upload:/var/www/upload"
       - /var/log
       - /var/log/piwigo:/var/log/apache2
    ports:

@@ -6,21 +6,11 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV HOME /root
 
 RUN apt-get update \
-     && apt-get dist-upgrade -y \
-     && apt-get install apache2 libapache2-mod-php5 -y \
-     && apt-get clean \
+     && apt-get upgrade -yy \
+     && apt-get install apache2 libapache2-mod-php5 -yy \
+     && apt-get install -yy php5-mysql imagemagick wget unzip \
+     && apt-get install -yy php5-gd php5-ffmpeg dcraw mediainfo ffmpeg \
      && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN apt-get update && \
-    apt-get install -y php5-mysql imagemagick wget unzip && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-
-RUN apt-get update && \
-    apt-get install -y php5-gd php5-ffmpeg dcraw mediainfo ffmpeg && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=latest && \
     unzip piwigo.zip && \

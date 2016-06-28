@@ -12,7 +12,7 @@ RUN apt-get update \
      && apt-get install -yy php5-gd php5-ffmpeg dcraw mediainfo ffmpeg \
      && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=latest && \
+RUN wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=2.8.1 && \
     unzip piwigo.zip && \
     rm /var/www/* -rf && \
     mv piwigo/* /var/www && \

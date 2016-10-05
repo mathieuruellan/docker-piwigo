@@ -3,7 +3,7 @@
 This is an image for piwigo, linked with a mysql database.
 Data must be stored on a volume.
 
-Edit this `fig.yml` and launch with the command `$ fig up -d `
+Edit this `docker-compose.yml` and launch with the command `$ docker-compose up -d `
 
 ```
 mysqlpiwigo:

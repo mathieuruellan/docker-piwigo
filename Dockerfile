@@ -12,7 +12,7 @@ RUN apt-get update \
      && apt-get install -yy php5-gd php5-ffmpeg dcraw mediainfo ffmpeg \
      && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=2.8.2 && \
+RUN wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=2.8.5 && \
     unzip piwigo.zip && \
     rm /var/www/* -rf && \
     mv piwigo/* /var/www && \
@@ -25,7 +25,6 @@ RUN mv /var/www/galleries /template/
 RUN mv /var/www/themes /template/
 RUN mv /var/www/plugins /template/
 RUN mv /var/www/local /template/
-
 
 RUN mkdir -p /var/www/_data/i
 RUN chown -R www-data:www-data /var/www

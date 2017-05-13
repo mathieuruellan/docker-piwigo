@@ -1,4 +1,6 @@
-#Piwigo-Docker
+(This is a clone on github from the sources of mathieuruellan/piwigo which seems not to be maintained anymore)
+
+# Piwigo-Docker
 
 This is an image for piwigo, linked with a mysql database.
 Data must be stored on a volume.

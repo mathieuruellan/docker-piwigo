@@ -10,6 +10,7 @@ RUN apt-get update \
      && apt-get install apache2 libapache2-mod-php5 -yy \
      && apt-get install -yy php5-mysql imagemagick wget unzip \
      && apt-get install -yy php5-gd php5-ffmpeg dcraw mediainfo ffmpeg \
+     && apt-get install -yy php5-curl \
      && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=2.9.0 && \

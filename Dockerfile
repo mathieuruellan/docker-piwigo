@@ -9,7 +9,7 @@ RUN apt-get update \
      && apt-get upgrade -yy \
      && apt-get install apache2 libapache2-mod-php5 -yy \
      && apt-get install -yy php5-mysql imagemagick wget unzip \
-     && apt-get install -yy php5-gd php5-ffmpeg dcraw mediainfo ffmpeg \
+     && apt-get install -yy php5-gd php5-curl php5-ffmpeg dcraw mediainfo ffmpeg \
      && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=2.9.0 && \
@@ -34,5 +34,4 @@ VOLUME ["/var/www/galleries", "/var/www/themes", "/var/www/plugins", "/var/www/l
 
 ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT /entrypoint.sh
-EXPOSE 80 
-
+EXPOSE 80

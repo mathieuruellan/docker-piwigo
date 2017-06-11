@@ -9,6 +9,7 @@ RUN apt-get update \
      && apt-get upgrade -yy \
      && apt-get install apache2 libapache2-mod-php5 -yy \
      && apt-get install -yy php5-mysql imagemagick wget unzip \
+     && apt-get install -yy php5-gd php5-ffmpeg dcraw mediainfo ffmpeg \
      && apt-get install -yy php5-gd php5-curl php5-ffmpeg dcraw mediainfo ffmpeg \
      && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

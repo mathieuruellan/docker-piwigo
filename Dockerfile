@@ -1,4 +1,4 @@
-FROM debian:wheezy
+FROM debian:wheezy-slim
 
 MAINTAINER Mathieu Ruellan <mathieu.ruellan@gmail.com>
 

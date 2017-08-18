@@ -5,6 +5,8 @@ MAINTAINER Mathieu Ruellan <mathieu.ruellan@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV HOME /root
 
+ARG PIWIGO_VERSION="2.9.1"
+
 RUN apt-get update \
      && apt-get upgrade -yy \
      && apt-get install apache2 libapache2-mod-php5 -yy \
@@ -13,7 +15,7 @@ RUN apt-get update \
      && apt-get install -yy php5-gd php5-curl php5-ffmpeg dcraw mediainfo ffmpeg \
      && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=2.9.0 && \
+RUN wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=$PIWIGO_VERSION && \
     unzip piwigo.zip && \
     rm /var/www/* -rf && \
     mv piwigo/* /var/www && \

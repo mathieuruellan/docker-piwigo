@@ -1,4 +1,4 @@
-#Piwigo-Docker
+# Piwigo-Docker
 
 This is an image for piwigo, linked with a mysql database.
 Data must be stored on a volume.
@@ -7,9 +7,9 @@ Edit this `docker-compose.yml` and launch with the command `$ docker-compose up 
 
 ```
 mysqlpiwigo:
-   image: mysql:5.5 
+   image: mysql:5.5
    volumes:
-      - /home/piwigo/mysql/:/var/lib/mysql 
+      - /home/piwigo/mysql/:/var/lib/mysql
    environment:
       - MYSQL_ROOT_PASSWORD=MYROOTPASSWORD
       - MYSQL_DATABASE=piwigo
@@ -18,14 +18,14 @@ mysqlpiwigo:
 piwigo:
    image: mathieuruellan/piwigo
    links:
-      - mysqlpiwigo:mysql 
+      - mysqlpiwigo:mysql
    volumes:
       - /home/piwigo/data/galleries:/var/www/galleries
       - /home/piwigo/data/local:/var/www/local
       - /home/piwigo/data/plugins:/var/www/plugins
       - /home/piwigo/data/themes:/var/www/themes
       - /home/piwigo/cache:/var/www/_data/i
-      - /home/piwigo/upload:/var/www/upload"
+      - /home/piwigo/upload:/var/www/upload
       - /var/log
       - /var/log/piwigo:/var/log/apache2
    ports:
@@ -34,7 +34,5 @@ piwigo:
    domainname: MYDOMAIN.COM
 
 ```
+
 After db initialization (first launch), environment variables can me removed.
-
-
-

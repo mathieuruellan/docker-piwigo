@@ -3,6 +3,15 @@
 This is an image for piwigo, linked with a mysql database.
 Data must be stored on a volume.
 
+## Features
+- Easy deployment of Piwigo with a docker-compose.
+
+## Changes
+- Upgrade to debian:stretch 
+- Upgrade to Piwigo 2.9.2
+
+## Deployment
+
 Edit this `docker-compose.yml` and launch with the command `$ docker-compose up -d `
 
 ```

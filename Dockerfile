@@ -1,4 +1,4 @@
-FROM debian:wheezy-slim
+FROM debian:stretch-slim
 
 MAINTAINER Mathieu Ruellan <mathieu.ruellan@gmail.com>
 
@@ -8,17 +8,26 @@ ENV HOME /root
 ARG PIWIGO_VERSION="2.9.2"
 
 RUN apt-get update \
-     && apt-get upgrade -yy \
-     && apt-get install apache2 libapache2-mod-php5 -yy \
-     && apt-get install -yy php5-mysql imagemagick wget unzip \
-     && apt-get install -yy php5-gd php5-ffmpeg dcraw mediainfo ffmpeg \
-     && apt-get install -yy php5-gd php5-curl php5-ffmpeg dcraw mediainfo ffmpeg \
+     && apt-get install -yy \
+            apache2 \
+            libapache2-mod-php \
+            php-gd \
+            php-curl \
+            php-mysql \
+            php-mbstring \
+            php-xml \
+            dcraw \
+            mediainfo \
+            ffmpeg\
+            imagemagick \
+            wget \
+            unzip \
      && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=$PIWIGO_VERSION && \
     unzip piwigo.zip && \
     rm /var/www/* -rf && \
-    mv piwigo/* /var/www && \
+    mv piwigo/* /var/www/ && \
     rm -r piwigo*
 
 ADD php.ini /etc/php5/apache2/php.ini

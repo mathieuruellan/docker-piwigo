@@ -13,7 +13,11 @@ RUN apt-get update \
      && apt-get install -yy php5-mysql imagemagick wget unzip \
      && apt-get install -yy php5-gd php5-ffmpeg dcraw mediainfo ffmpeg \
      && apt-get install -yy php5-gd php5-curl php5-ffmpeg dcraw mediainfo ffmpeg \
-     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+     && wget http://mediaarea.net/download/binary/mediainfo/0.7.74/mediainfo_0.7.74-1_amd64.Debian_7.0.deb \
+     && wget http://mediaarea.net/download/binary/libmediainfo0/0.7.74/libmediainfo0_0.7.74-1_amd64.Debian_7.0.deb \
+     && wget http://mediaarea.net/download/binary/libzen0/0.4.31/libzen0_0.4.31-1_amd64.Debian_7.0.deb \
+     && dpkg -i libzen0_0.4.31-1_amd64.Debian_7.0.deb libmediainfo0_0.7.74-1_amd64.Debian_7.0.deb mediainfo_0.7.74-1_amd64.Debian_7.0.deb \
+     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* *.deb
 
 RUN wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=$PIWIGO_VERSION && \
     unzip piwigo.zip && \

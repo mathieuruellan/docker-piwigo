@@ -8,7 +8,7 @@ ENV HOME /root
 ARG PIWIGO_VERSION="2.9.2"
 
 RUN apt-get update \
-     && apt-get upgrade -yy \
+     && apt-get dist-upgrade -yy \
      && apt-get install apache2 libapache2-mod-php5 -yy \
      && apt-get install -yy php5-mysql imagemagick wget unzip \
      && apt-get install -yy php5-gd php5-ffmpeg dcraw mediainfo ffmpeg \
@@ -29,7 +29,6 @@ RUN mv /var/www/themes /template/
 RUN mv /var/www/plugins /template/
 RUN mv /var/www/local /template/
 
-
 RUN mkdir -p /var/www/_data/i
 RUN chown -R www-data:www-data /var/www
 
@@ -38,3 +37,4 @@ VOLUME ["/var/www/galleries", "/var/www/themes", "/var/www/plugins", "/var/www/l
 ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT /entrypoint.sh
 EXPOSE 80
+

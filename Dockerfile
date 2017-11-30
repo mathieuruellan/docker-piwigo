@@ -41,9 +41,10 @@ RUN mv /var/www/local /template/
 RUN mkdir -p /var/www/_data/i /config
 RUN chown -R www-data:www-data /var/www
 
-VOLUME ["/var/www/galleries", "/var/www/themes", "/var/www/plugins", "/var/www/local", "/var/www/_data/i" "/config"]
+VOLUME ["/var/www/galleries", "/var/www/themes", "/var/www/plugins", "/var/www/local", "/var/www/_data/i", "/config"]
 
 ADD entrypoint.sh /entrypoint.sh
+RUN chmod u+x /entrypoint.sh
 ENTRYPOINT /entrypoint.sh
 EXPOSE 80
 

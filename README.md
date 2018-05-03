@@ -8,7 +8,7 @@ Data must be stored on a volume.
 
 ## Changes
 - Upgrade to debian:stretch 
-- Upgrade to Piwigo 2.9.2
+- Upgrade to Piwigo 2.9.3
 
 ## Deployment
 

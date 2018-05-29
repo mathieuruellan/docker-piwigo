@@ -22,6 +22,8 @@ RUN apt-get update \
             imagemagick \
             wget \
             unzip \
+            libav-tools \
+            mediainfo \
      && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=$PIWIGO_VERSION && \

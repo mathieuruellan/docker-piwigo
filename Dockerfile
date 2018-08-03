@@ -5,7 +5,7 @@ MAINTAINER Mathieu Ruellan <mathieu.ruellan@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV HOME /root
 
-ARG PIWIGO_VERSION="2.9.3"
+ARG PIWIGO_VERSION="2.9.4"
 
 RUN apt-get update \
      && apt-get install -yy \
@@ -49,4 +49,3 @@ ADD entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 ENTRYPOINT /entrypoint.sh
 EXPOSE 80
-

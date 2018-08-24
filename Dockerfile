@@ -30,19 +30,16 @@ RUN wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=$PIWIGO_
     unzip piwigo.zip && \
     rm /var/www/* -rf && \
     mv piwigo/* /var/www/ && \
-    rm -r piwigo*
+    rm -r piwigo* && \
+    mkdir /template && \
+    mv /var/www/galleries /template/ && \
+    mv /var/www/themes /template/ && \
+    mv /var/www/plugins /template/ && \
+    mv /var/www/local /template/ && \
+    mkdir -p /var/www/_data/i /config && \
+    chown -R www-data:www-data /var/www
 
-ADD php.ini /etc/php5/apache2/php.ini
-
-RUN mkdir /template
-RUN mv /var/www/galleries /template/
-RUN mv /var/www/themes /template/
-RUN mv /var/www/plugins /template/
-RUN mv /var/www/local /template/
-
-RUN mkdir -p /var/www/_data/i /config
-RUN chown -R www-data:www-data /var/www
-
+ADD php.ini /etc/php/7.0/apache2/php.ini
 VOLUME ["/var/www/galleries", "/var/www/themes", "/var/www/plugins", "/var/www/local", "/var/www/_data/i", "/config"]
 
 ADD entrypoint.sh /entrypoint.sh

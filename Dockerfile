@@ -16,6 +16,7 @@ RUN apt-get update \
             php-mysql \
             php-mbstring \
             php-xml \
+            php-imagick \
             dcraw \
             mediainfo \
             ffmpeg\

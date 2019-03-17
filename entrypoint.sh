@@ -14,6 +14,12 @@ sed -i "s/\/var\/www\/html/\/var\/www/g"  /etc/apache2/sites-enabled/000-default
 
 chown -R www-data:www-data /var/www
 
+if [ ! -z "${PIWIGO_MYSQL_ENGINE}" ]; then
+	grep -Rn MyISAM /var/www/install | cut -d: -f1 | sort -u | while read file; do
+		sed -i 's/MyISAM/InnoDB/' "${file}";
+	done;
+fi;
+
 source /etc/apache2/envvars
 apache2ctl -D FOREGROUND
 

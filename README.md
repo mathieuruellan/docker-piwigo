@@ -6,17 +6,13 @@ Data must be stored on a volume.
 ## Features
 - Easy deployment of Piwigo with a docker-compose.
 
-## Changes
-- Upgrade to debian:stretch 
-- Upgrade to Piwigo 2.9.3
-
 ## Deployment
 
 Edit this `docker-compose.yml` and launch with the command `$ docker-compose up -d `
 
 ```
 mysqlpiwigo:
-   image: mysql:5.5
+   image: mariadb:latest
    volumes:
       - /home/piwigo/mysql/:/var/lib/mysql
    environment:

@@ -1,11 +1,11 @@
-FROM debian:stretch-slim
+FROM debian:buster-slim
 
 MAINTAINER Mathieu Ruellan <mathieu.ruellan@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV HOME /root
 
-ARG PIWIGO_VERSION="2.9.4"
+ARG PIWIGO_VERSION="2.10.1"
 
 RUN apt-get update \
      && apt-get install -yy \
@@ -23,8 +23,9 @@ RUN apt-get update \
             imagemagick \
             wget \
             unzip \
-            libav-tools \
+            ffmpeg \
             mediainfo \
+            exiftool \
      && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=$PIWIGO_VERSION && \
@@ -38,9 +39,13 @@ RUN wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=$PIWIGO_
     mv /var/www/plugins /template/ && \
     mv /var/www/local /template/ && \
     mkdir -p /var/www/_data/i /config && \
-    chown -R www-data:www-data /var/www
+    chown -R www-data:www-data /var/www &&\
+    sed -i "s/max_execution_time = 30/max_execution_time = 300/" /etc/php/7.3/apache2/php.ini &&\
+    sed -i "s/memory_limit = 128M/memory_limit = 512M/" /etc/php/7.3/apache2/php.ini &&\
+    sed -i "s/max_input_time = 60/max_input_time = 180/" /etc/php/7.3/apache2/php.ini &&\
+    sed -i "s/post_max_size = 8M/post_max_size = 100M/" /etc/php/7.3/apache2/php.ini &&\
+    sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 100M/" /etc/php/7.3/apache2/php.ini
 
-ADD php.ini /etc/php/7.0/apache2/php.ini
 VOLUME ["/var/www/galleries", "/var/www/themes", "/var/www/plugins", "/var/www/local", "/var/www/_data/i", "/config"]
 
 ADD entrypoint.sh /entrypoint.sh

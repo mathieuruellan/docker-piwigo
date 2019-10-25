@@ -7,8 +7,8 @@ ENV HOME /root
 
 ARG PIWIGO_VERSION="2.10.1"
 
-RUN apt-get update \
-     && apt-get install -yy \
+RUN apt update -y \
+     && apt install -yy \
             apache2 \
             libapache2-mod-php \
             php-gd \
@@ -22,8 +22,7 @@ RUN apt-get update \
             ffmpeg\
             imagemagick \
             wget \
-            unzip \
-            ffmpeg \
+            unzip \            
             mediainfo \
             exiftool \
      && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

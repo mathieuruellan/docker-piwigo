@@ -22,8 +22,7 @@ RUN apt update -y \
             ffmpeg\
             imagemagick \
             wget \
-            unzip \            
-            mediainfo \
+            unzip \
             exiftool \
      && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

@@ -5,7 +5,7 @@ MAINTAINER Mathieu Ruellan <mathieu.ruellan@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV HOME /root
 
-ARG PIWIGO_VERSION="2.10.2"
+ARG PIWIGO_VERSION="11.5.0"
 
 RUN apt update -y \
      && apt install -yy \

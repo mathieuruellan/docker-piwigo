@@ -41,3 +41,5 @@ piwigo:
 ```
 
 After db initialization (first launch), environment variables can me removed.
+
+.

@@ -11,6 +11,7 @@ find /config/php/apache2.d -type f | while read file; do
 done;
 
 sed -i "s/\/var\/www\/html/\/var\/www/g"  /etc/apache2/sites-enabled/000-default.conf
+sed -i '/^\s*DocumentRoot.*/a \\tSetEnv HTTPS on' /etc/apache2/sites-enabled/000-default.conf
 
 chown -R www-data:www-data /var/www
 

@@ -1,0 +1,27 @@
+services:
+  mysqlpiwigo:
+    image: mariadb:latest
+    volumes:
+        - ./piwigo/mysql/:/var/lib/mysql
+    environment:
+        - MYSQL_ROOT_PASSWORD=MYROOTPASSWORD
+        - MYSQL_DATABASE=piwigo
+        - MYSQL_USER=piwigo
+        - MYSQL_PASSWORD=MYUSERPASSWORD
+  piwigo:
+    build: .
+    links:
+        - mysqlpiwigo:mysql
+    volumes:
+        - ./piwigo/data/galleries:/var/www/galleries
+        - ./piwigo/data/local:/var/www/local
+        - ./piwigo/data/plugins:/var/www/plugins
+        - ./piwigo/data/themes:/var/www/themes
+        - ./piwigo/cache:/var/www/_data/i
+        - ./piwigo/upload:/var/www/upload
+        - ./var/log:/var/log
+        - ./var/log/piwigo:/var/log/apache2
+    ports:
+        - "9999:80"
+    hostname: piwigo
+    domainname: MYDOMAIN.COM

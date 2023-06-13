@@ -14,7 +14,7 @@ Edit this `docker-compose.yml` and launch with the command `$ docker-compose up 
 mysqlpiwigo:
    image: mariadb:latest
    volumes:
-      - /home/piwigo/mysql/:/var/lib/mysql
+      - ./piwigo/mysql/:/var/lib/mysql
    environment:
       - MYSQL_ROOT_PASSWORD=MYROOTPASSWORD
       - MYSQL_DATABASE=piwigo
@@ -25,14 +25,14 @@ piwigo:
    links:
       - mysqlpiwigo:mysql
    volumes:
-      - /home/piwigo/data/galleries:/var/www/galleries
-      - /home/piwigo/data/local:/var/www/local
-      - /home/piwigo/data/plugins:/var/www/plugins
-      - /home/piwigo/data/themes:/var/www/themes
-      - /home/piwigo/cache:/var/www/_data/i
-      - /home/piwigo/upload:/var/www/upload
-      - /var/log
-      - /var/log/piwigo:/var/log/apache2
+      - ./piwigo/data/galleries:/var/www/galleries
+      - ./piwigo/data/local:/var/www/local
+      - ./piwigo/data/plugins:/var/www/plugins
+      - ./piwigo/data/themes:/var/www/themes
+      - ./piwigo/cache:/var/www/_data/i
+      - ./piwigo/upload:/var/www/upload
+      - ./var/log:/var/log
+      - ./var/log/piwigo:/var/log/apache2
    ports:
       - "MYPORT:80"
    hostname: piwigo

@@ -5,20 +5,28 @@ LABEL MAINTAINER="Mathieu Ruellan <mathieu.ruellan@gmail.com>"
 ENV DEBIAN_FRONTEND noninteractive
 ENV HOME /root
 
-ARG PIWIGO_VERSION="12.2.0"
+ARG PIWIGO_VERSION="13.7.0"
+
+RUN <<EOF
+set -e
+apt update -yyq
+apt install -yyq ca-certificates apt-transport-https software-properties-common wget curl lsb-release sudo
+curl -sSL https://packages.sury.org/php/README.txt | sudo bash -x
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+EOF
 
 RUN <<EOF 
 set -e
 apt update -yy
 apt install -yy \
             apache2 \
-            libapache2-mod-php \
-            php-gd \
-            php-curl \
-            php-mysql \
-            php-mbstring \
-            php-xml \
-            php-imagick \
+            libapache2-mod-php8.1 \
+            php8.1-gd \
+            php8.1-curl \
+            php8.1-mysql \
+            php8.1-mbstring \
+            php8.1-xml \
+            php8.1-imagick \
             dcraw \
             mediainfo \
             ffmpeg\
@@ -43,11 +51,11 @@ mv /var/www/plugins /template/
 mv /var/www/local /template/
 mkdir -p /var/www/_data/i /config
 chown -R www-data:www-data /var/www
-sed -i "s/max_execution_time = 30/max_execution_time = 300/" /etc/php/8.2/apache2/php.ini
-sed -i "s/memory_limit = 128M/memory_limit = 512M/" /etc/php/8.2/apache2/php.ini
-sed -i "s/max_input_time = 60/max_input_time = 180/" /etc/php/8.2/apache2/php.ini
-sed -i "s/post_max_size = 8M/post_max_size = 100M/" /etc/php/8.2/apache2/php.ini
-sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 100M/" /etc/php/8.2/apache2/php.ini
+sed -i "s/max_execution_time = 30/max_execution_time = 300/" /etc/php/8.1/apache2/php.ini
+sed -i "s/memory_limit = 128M/memory_limit = 512M/" /etc/php/8.1/apache2/php.ini
+sed -i "s/max_input_time = 60/max_input_time = 180/" /etc/php/8.1/apache2/php.ini
+sed -i "s/post_max_size = 8M/post_max_size = 100M/" /etc/php/8.1/apache2/php.ini
+sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 100M/" /etc/php/8.1/apache2/php.ini
 EOF
 
 VOLUME ["/var/www/galleries", "/var/www/themes", "/var/www/plugins", "/var/www/local", "/var/www/_data/i", "/config"]

@@ -4,7 +4,6 @@ LABEL MAINTAINER="Mathieu Ruellan <mathieu.ruellan@gmail.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV HOME /root
-
 ARG PIWIGO_VERSION="13.7.0"
 
 RUN <<EOF
@@ -61,10 +60,10 @@ EOF
 VOLUME ["/var/www/galleries", "/var/www/themes", "/var/www/plugins", "/var/www/local", "/var/www/_data/i", "/config"]
 
 
-
+ENV BASH_MODE="set -e"
 COPY <<EOF /entrypoint.sh
 #!/bin/bash
-set -xve
+\${BASH_MODE}
 for d in $(ls /template); do
   [ "$(ls -A /var/www/${d})" ] || cp -R /template/${d}/* /var/www/${d}/
 done

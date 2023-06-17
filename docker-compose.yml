@@ -10,6 +10,8 @@ services:
         - MYSQL_PASSWORD=MYUSERPASSWORD
   piwigo:
     build: .
+    environment:
+        - BASH_MODE=set -e
     links:
         - mysqlpiwigo:mysql
     volumes:

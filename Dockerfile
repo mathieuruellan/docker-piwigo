@@ -4,7 +4,7 @@ LABEL MAINTAINER="Mathieu Ruellan <mathieu.ruellan@gmail.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV HOME /root
-ARG PIWIGO_VERSION="13.7.0"
+ARG PIWIGO_VERSION="12.3.0"
 
 RUN <<EOF
 set -e

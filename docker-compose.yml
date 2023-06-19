@@ -1,19 +1,19 @@
 services:
-  mysqlpiwigo:
+  mariadb:
     image: mariadb:latest
     volumes:
         - ./piwigo/mysql/:/var/lib/mysql
     environment:
-        - MYSQL_ROOT_PASSWORD=MYROOTPASSWORD
-        - MYSQL_DATABASE=piwigo
-        - MYSQL_USER=piwigo
-        - MYSQL_PASSWORD=MYUSERPASSWORD
+        - MARIADB_ROOT_PASSWORD=MYROOTPASSWORD
+        - MARIADB_DATABASE=piwigo
+        - MARIADB_USER=piwigo
+        - MARIADB_PASSWORD=MYUSERPASSWORD
   piwigo:
     build: .
     environment:
         - BASH_MODE=set -e
-    links:
-        - mysqlpiwigo:mysql
+    depends_on:
+        - mariadb
     volumes:
         - ./piwigo/data/galleries:/var/www/galleries
         - ./piwigo/data/local:/var/www/local

@@ -8,38 +8,49 @@ Data must be stored on a volume.
 
 ## Deployment
 
-Edit this `docker-compose.yml` and launch with the command `$ docker-compose up -d `
+Edit this `docker-compose.yml` and launch with the command 
 
 ```
-mysqlpiwigo:
-   image: mariadb:latest
-   volumes:
-      - ./piwigo/mysql/:/var/lib/mysql
-   environment:
-      - MYSQL_ROOT_PASSWORD=MYROOTPASSWORD
-      - MYSQL_DATABASE=piwigo
-      - MYSQL_USER=piwigo
-      - MYSQL_PASSWORD=MYUSERPASSWORD
-piwigo:
-   image: mathieuruellan/piwigo
-   links:
-      - mysqlpiwigo:mysql
-   volumes:
-      - ./piwigo/data/galleries:/var/www/galleries
-      - ./piwigo/data/local:/var/www/local
-      - ./piwigo/data/plugins:/var/www/plugins
-      - ./piwigo/data/themes:/var/www/themes
-      - ./piwigo/cache:/var/www/_data/i
-      - ./piwigo/upload:/var/www/upload
-      - ./var/log:/var/log
-      - ./var/log/piwigo:/var/log/apache2
-   ports:
-      - "MYPORT:80"
-   hostname: piwigo
-   domainname: MYDOMAIN.COM
+mkdir -p ./piwigo/data/local/config
+chmod -R 0777 ./piwigo
+ docker-compose up -d 
+```
+
+```
+services:
+  mariadb:
+    image: mariadb:latest
+    volumes:
+        - ./piwigo/mysql/:/var/lib/mysql
+    environment:
+        - MARIADB_ROOT_PASSWORD=piwigo
+        - MARIADB_DATABASE=piwigo
+        - MARIADB_USER=piwigo
+        - MARIADB_PASSWORD=piwigo
+  piwigo:
+    image: mathieuruellan/piwigo
+    environment:
+        - BASH_MODE=set -e
+    depends_on:
+        - mariadb
+    volumes:
+        - ./piwigo/data/galleries:/var/www/galleries
+        - ./piwigo/data/local:/var/www/local
+        - ./piwigo/data/plugins:/var/www/plugins
+        - ./piwigo/data/themes:/var/www/themes
+        - ./piwigo/cache:/var/www/_data/i
+        - ./piwigo/upload:/var/www/upload
+        - ./var/log:/var/log
+        - ./var/log/piwigo:/var/log/apache2
+    ports:
+        - "9999:80"
+    hostname: localhost
+    domainname: mydomain
 
 ```
 
 After db initialization (first launch), environment variables can me removed.
 
-.
+
+EDIT: installation with version 13.7.0 from scratch  seems to be broken.
+Install with mathieuruellan/piwigo:12.3.0 first and upgrade

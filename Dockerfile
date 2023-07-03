@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 LABEL MAINTAINER="Mathieu Ruellan <mathieu.ruellan@gmail.com>"
 

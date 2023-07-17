@@ -52,5 +52,5 @@ services:
 After db initialization (first launch), environment variables can me removed.
 
 
-EDIT: installation with version 13.7.0 from scratch  seems to be broken.
+EDIT: installation with version 13.x from scratch  seems to be broken.
 Install with mathieuruellan/piwigo:12.3.0 first and upgrade

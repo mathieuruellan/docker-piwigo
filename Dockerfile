@@ -68,11 +68,6 @@ for d in $(ls /template); do
   [ "$(ls -A /var/www/${d})" ] || cp -R /template/${d}/* /var/www/${d}/
 done
 
-mkdir -pv /config/php/apache2.d
-find /config/php/apache2.d -type f | while read file; do
-	ln -svf "${file}" "/etc/php/8.2/apache2/conf.d/$(basename "${file}")";
-done;
-
 sed -i 's/\\/var\\/www\\/html/\\/var\\/www/g'  /etc/apache2/sites-enabled/000-default.conf
 sed -i '/^\s*DocumentRoot.*/a \\tSetEnv HTTPS on' /etc/apache2/sites-enabled/000-default.conf
 

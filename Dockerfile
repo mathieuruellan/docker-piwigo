@@ -1,3 +1,4 @@
+#syntax=docker/dockerfile:1.3-labs
 FROM debian:bookworm-slim
 
 LABEL MAINTAINER="Mathieu Ruellan <mathieu.ruellan@gmail.com>"

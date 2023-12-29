@@ -1,33 +1,73 @@
-FROM debian:bookworm-slim
+FROM php:8.2-fpm-alpine
 
 LABEL MAINTAINER="Mathieu Ruellan <mathieu.ruellan@gmail.com>"
 
-ENV DEBIAN_FRONTEND noninteractive
+#ENV DEBIAN_FRONTEND noninteractive
 ENV HOME /root
 ARG PIWIGO_VERSION="14.1.0"
 
-RUN <<EOF 
+RUN <<EOF
 set -e
-apt update -yy
-apt install -yy --no-install-recommends  --no-install-suggests \
-            wget curl \
+apk update
+apk upgrade
+
+apk add     wget \
+            bash \
+            curl \
             nginx \
-            php8.2-fpm \
-            php8.2-gd \
-            php8.2-curl \
-            php8.2-mysql \
-            php8.2-mbstring \
-            php8.2-xml \
-            php8.2-imagick \
-            dcraw \
+            php82-fpm \
+            libpng libpng-dev \
+            zlib zlib-dev \
+            libcurl curl-dev \
+            libxml2 libxml2-dev \
+            oniguruma oniguruma-dev \
+
+
+#mysql
+docker-php-ext-install mysqli pdo pdo_mysql
+docker-php-ext-install gd
+docker-php-ext-install exif
+docker-php-ext-install curl
+docker-php-ext-install xml
+docker-php-ext-install mbstring
+
+#image magick
+apk add --no-cache --virtual .build-deps \$PHPIZE_DEPS imagemagick-dev
+pecl install imagick
+docker-php-ext-enable imagick
+apk del .build-deps
+
+apk add \
             mediainfo \
             ffmpeg\
             imagemagick \
             wget \
             unzip \
             exiftool 
-rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-EOF
+
+
+#RUN <<EOF 
+#set -e
+#apt update -yy
+#apt install -yy --no-install-recommends  --no-install-suggests \
+#            wget curl \
+#            nginx \
+ #           php8.2-fpm \
+ #           php8.2-gd \
+ #           php8.2-curl \
+ #           php8.2-mysql \
+ ####           php8.2-mbstring \
+ #           php8.2-xml \
+ #           php8.2-imagick \
+ #           dcraw \
+ #           mediainfo \
+ #           ffmpeg\
+ #           imagemagick \
+ #           wget \
+ #           unzip \
+ #           exiftool 
+#rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+#EOF
 
 RUN <<EOF
 set -exv

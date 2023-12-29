@@ -1,8 +1,9 @@
+version: '3.9'
 services:
   mariadb:
     image: mariadb:latest
     volumes:
-        - ./piwigo/mysql/:/var/lib/mysql
+        - ./data/mysql/:/var/lib/mysql
     environment:
         - MARIADB_ROOT_PASSWORD=MYROOTPASSWORD
         - MARIADB_DATABASE=piwigo
@@ -15,14 +16,14 @@ services:
     depends_on:
         - mariadb
     volumes:
-        - ./piwigo/data/galleries:/var/www/galleries
-        - ./piwigo/data/local:/var/www/local
-        - ./piwigo/data/plugins:/var/www/plugins
-        - ./piwigo/data/themes:/var/www/themes
-        - ./piwigo/cache:/var/www/_data/i
-        - ./piwigo/upload:/var/www/upload
-        - ./var/log:/var/log
-        - ./var/log/piwigo:/var/log/apache2
+        - ./data/piwigo/data/galleries:/var/www/galleries
+        - ./data/piwigo/data/local:/var/www/local
+        - ./data/piwigo/data/plugins:/var/www/plugins
+        - ./data/piwigo/data/themes:/var/www/themes
+        - ./data/piwigo/cache:/var/www/_data/i
+        - ./data/piwigo/upload:/var/www/upload
+        - ./data/var/log:/var/log
+        - ./data/var/log/piwigo:/var/log/nginx
     ports:
         - "9999:80"
     hostname: piwigo

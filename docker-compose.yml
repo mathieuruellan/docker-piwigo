@@ -1,3 +1,4 @@
+version: '3.9'
 services:
   mariadb:
     image: mariadb:latest
@@ -22,7 +23,7 @@ services:
         - ./piwigo/cache:/var/www/_data/i
         - ./piwigo/upload:/var/www/upload
         - ./var/log:/var/log
-        - ./var/log/piwigo:/var/log/apache2
+        - ./var/log/piwigo:/var/log/nginx
     ports:
         - "9999:80"
     hostname: piwigo

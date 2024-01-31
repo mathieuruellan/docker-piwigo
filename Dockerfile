@@ -1,7 +1,7 @@
 FROM php:8.2-fpm-alpine
 
 LABEL MAINTAINER="Mathieu Ruellan <mathieu.ruellan@gmail.com>"
-ARG PIWIGO_VERSION="14.1.0"
+ARG PIWIGO_VERSION="14.2.0"
 ENV BASH_MODE="set -e"
 
 RUN <<EOF

@@ -1,7 +1,7 @@
 FROM php:8.2-fpm-alpine
 
 LABEL MAINTAINER="Mathieu Ruellan <mathieu.ruellan@gmail.com>"
-ARG PIWIGO_VERSION="14.2.0"
+ARG PIWIGO_VERSION="14.3.0"
 ENV BASH_MODE="set -e"
 
 RUN <<EOF
@@ -24,6 +24,7 @@ apk add     wget \
             wget \
             unzip \
             exiftool \
+            libldap \
             php82-pecl-imagick \
 
 EOF
@@ -37,11 +38,13 @@ apk add     libpng-dev \
             libxml2-dev \
             oniguruma-dev \
             imagemagick-dev \
+            openldap-dev \
 
 EOF
 
 RUN <<EOF
 ${BASH_MODE}     
+docker-php-ext-install ldap
 docker-php-ext-install mbstring
 docker-php-ext-install mysqli pdo pdo_mysql
 docker-php-ext-install gd
@@ -59,6 +62,7 @@ apk del     libpng-dev \
             libxml2-dev \
             oniguruma-dev \
             imagemagick-dev \
+            openldap-dev \
 
 EOF
 

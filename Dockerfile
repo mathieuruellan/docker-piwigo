@@ -140,6 +140,8 @@ server {
 
     root /var/www;
 
+    client_max_body_size 100m;
+
     location ~ \.php\$ {
         try_files \$uri =404;
         fastcgi_split_path_info ^(.+\.php)(/.+)\$;

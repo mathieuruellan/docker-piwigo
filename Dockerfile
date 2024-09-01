@@ -26,6 +26,7 @@ apk add     wget \
             exiftool \
             libldap \
             php82-pecl-imagick \
+            libzip \
 
 EOF
 
@@ -39,11 +40,13 @@ apk add     libpng-dev \
             oniguruma-dev \
             imagemagick-dev \
             openldap-dev \
+            libzip-dev \
 
 EOF
 
 RUN <<EOF
 ${BASH_MODE}     
+docker-php-ext-install zip
 docker-php-ext-install ldap
 docker-php-ext-install mbstring
 docker-php-ext-install mysqli pdo pdo_mysql
@@ -63,6 +66,7 @@ apk del     libpng-dev \
             oniguruma-dev \
             imagemagick-dev \
             openldap-dev \
+            libzip-dev \
 
 EOF
 
